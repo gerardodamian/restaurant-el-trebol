@@ -1,4 +1,3 @@
-\germo\Desktop\el trebol\restaurante el Trebol\reservas.html
 <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -19,57 +18,112 @@
         <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 
         <!-- Bootstrap Icons -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+        />
     </head>
     <body>
         <!-- Header con Bootstrap -->
         <!-- Versión corregida del navbar para todas las páginas -->
-<header class="bg-white shadow-sm sticky-top">
-    <div class="container py-2">
-        <div class="row align-items-center">
-            <div class="col-md-6 d-flex align-items-center justify-content-center justify-content-md-start">
-                <a href="index.html" class="text-decoration-none">
-                    <img src="assets/img/logo.jpg" alt="Logo Restaurante El Trébol" 
-                         class="me-3 rounded-circle border" width="60" height="60" 
-                         onerror="this.src='https://via.placeholder.com/60/f8f9fa/4caf50?text=ET'">
-                </a>
-                <h1 class="mb-0 text-wrap">Restaurante El Trébol</h1>
-            </div>
-            <div class="col-md-6 mt-2 mt-md-0">
-                <div class="d-flex flex-wrap justify-content-center justify-content-md-end gap-2">
-                    <!-- Menú de navegación -->
-                    <nav class="navbar navbar-expand me-md-3">
-                        <ul class="navbar-nav">
-                            <li class="nav-item">
-                                <a class="nav-link" id="nav-inicio" href="index.html">Inicio</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="nav-menu" href="menu.html">Menú</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="nav-reservas" href="reservas.html">Reservas</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="nav-contacto" href="contacto.html">Contacto</a>
-                            </li>
-                        </ul>
-                    </nav>
+        <header class="bg-white shadow-sm sticky-top">
+            <div class="container py-2">
+                <div class="row align-items-center">
+                    <div
+                        class="col-md-6 d-flex align-items-center justify-content-center justify-content-md-start"
+                    >
+                        <a href="index.html" class="text-decoration-none">
+                            <img
+                                src="assets/img/logo.jpg"
+                                alt="Logo Restaurante El Trébol"
+                                class="me-3 rounded-circle border"
+                                width="60"
+                                height="60"
+                                onerror="this.src='https://via.placeholder.com/60/f8f9fa/4caf50?text=ET'"
+                            />
+                        </a>
+                        <h1 class="mb-0 text-wrap">Restaurante El Trébol</h1>
+                    </div>
+                    <div class="col-md-6 mt-2 mt-md-0">
+                        <div
+                            class="d-flex flex-wrap justify-content-center justify-content-md-end gap-2"
+                        >
+                            <!-- Menú de navegación -->
+                            <nav class="navbar navbar-expand me-md-3">
+                                <ul class="navbar-nav">
+                                    <li class="nav-item">
+                                        <a
+                                            class="nav-link"
+                                            id="nav-inicio"
+                                            href="index.html"
+                                            >Inicio</a
+                                        >
+                                    </li>
+                                    <li class="nav-item">
+                                        <a
+                                            class="nav-link"
+                                            id="nav-menu"
+                                            href="menu.html"
+                                            >Menú</a
+                                        >
+                                    </li>
+                                    <li class="nav-item">
+                                        <a
+                                            class="nav-link"
+                                            id="nav-reservas"
+                                            href="reservas.html"
+                                            >Reservas</a
+                                        >
+                                    </li>
+                                    <li class="nav-item">
+                                        <a
+                                            class="nav-link"
+                                            id="nav-contacto"
+                                            href="contacto.html"
+                                            >Contacto</a
+                                        >
+                                    </li>
+                                </ul>
+                            </nav>
 
-                    <!-- Botones de acción -->
-                    <button class="btn btn-outline-secondary d-flex align-items-center" id="searchBtn" type="button">
-                        <i data-lucide="search" class="me-2" width="18" height="18"></i>
-                        <span>Buscar</span>
-                    </button>
-                    <button class="btn btn-outline-success d-flex align-items-center position-relative" id="cartBtn" type="button">
-                        <i data-lucide="shopping-cart" class="me-2" width="18" height="18"></i>
-                        <span>Pedido</span>
-                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="cartBadge" style="display: none;">0</span>
-                    </button>
+                            <!-- Botones de acción -->
+                            <button
+                                class="btn btn-outline-secondary d-flex align-items-center"
+                                id="searchBtn"
+                                type="button"
+                            >
+                                <i
+                                    data-lucide="search"
+                                    class="me-2"
+                                    width="18"
+                                    height="18"
+                                ></i>
+                                <span>Buscar</span>
+                            </button>
+                            <button
+                                class="btn btn-outline-success d-flex align-items-center position-relative"
+                                id="cartBtn"
+                                type="button"
+                            >
+                                <i
+                                    data-lucide="shopping-cart"
+                                    class="me-2"
+                                    width="18"
+                                    height="18"
+                                ></i>
+                                <span>Pedido</span>
+                                <span
+                                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                                    id="cartBadge"
+                                    style="display: none"
+                                    >0</span
+                                >
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-</header>
+        </header>
 
         <!-- Contenido principal -->
         <main class="container py-4">
@@ -85,25 +139,61 @@
                             <h3 class="mb-4">Formulario de Reserva</h3>
                             <form id="reservaForm">
                                 <div class="mb-3">
-                                    <label for="nombre" class="form-label">Nombre y Apellido</label>
-                                    <input type="text" class="form-control" id="nombre" required>
+                                    <label for="nombre" class="form-label"
+                                        >Nombre y Apellido</label
+                                    >
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        id="nombre"
+                                        required
+                                    />
                                 </div>
                                 <div class="mb-3">
-                                    <label for="telefono" class="form-label">Teléfono</label>
-                                    <input type="tel" class="form-control" id="telefono" required>
+                                    <label for="telefono" class="form-label"
+                                        >Teléfono</label
+                                    >
+                                    <input
+                                        type="tel"
+                                        class="form-control"
+                                        id="telefono"
+                                        required
+                                    />
                                 </div>
                                 <div class="mb-3">
-                                    <label for="email" class="form-label">Email</label>
-                                    <input type="email" class="form-control" id="email" required>
+                                    <label for="email" class="form-label"
+                                        >Email</label
+                                    >
+                                    <input
+                                        type="email"
+                                        class="form-control"
+                                        id="email"
+                                        required
+                                    />
                                 </div>
                                 <div class="mb-3">
-                                    <label for="fecha" class="form-label">Fecha</label>
-                                    <input type="date" class="form-control" id="fecha" required>
+                                    <label for="fecha" class="form-label"
+                                        >Fecha</label
+                                    >
+                                    <input
+                                        type="date"
+                                        class="form-control"
+                                        id="fecha"
+                                        required
+                                    />
                                 </div>
                                 <div class="mb-3">
-                                    <label for="hora" class="form-label">Hora</label>
-                                    <select class="form-select" id="hora" required>
-                                        <option value="">Seleccionar hora</option>
+                                    <label for="hora" class="form-label"
+                                        >Hora</label
+                                    >
+                                    <select
+                                        class="form-select"
+                                        id="hora"
+                                        required
+                                    >
+                                        <option value="">
+                                            Seleccionar hora
+                                        </option>
                                         <option>12:00</option>
                                         <option>12:30</option>
                                         <option>13:00</option>
@@ -119,8 +209,14 @@
                                     </select>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="personas" class="form-label">Cantidad de Personas</label>
-                                    <select class="form-select" id="personas" required>
+                                    <label for="personas" class="form-label"
+                                        >Cantidad de Personas</label
+                                    >
+                                    <select
+                                        class="form-select"
+                                        id="personas"
+                                        required
+                                    >
                                         <option value="">Seleccionar</option>
                                         <option>1 persona</option>
                                         <option>2 personas</option>
@@ -128,14 +224,27 @@
                                         <option>4 personas</option>
                                         <option>5 personas</option>
                                         <option>6 personas</option>
-                                        <option value="grupo">Grupo (más de 6 personas)</option>
+                                        <option value="grupo">
+                                            Grupo (más de 6 personas)
+                                        </option>
                                     </select>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="mensaje" class="form-label">Solicitudes especiales</label>
-                                    <textarea class="form-control" id="mensaje" rows="3"></textarea>
+                                    <label for="mensaje" class="form-label"
+                                        >Solicitudes especiales</label
+                                    >
+                                    <textarea
+                                        class="form-control"
+                                        id="mensaje"
+                                        rows="3"
+                                    ></textarea>
                                 </div>
-                                <button type="submit" class="btn btn-success w-100">Confirmar Reserva</button>
+                                <button
+                                    type="submit"
+                                    class="btn btn-success w-100"
+                                >
+                                    Confirmar Reserva
+                                </button>
                             </form>
                         </div>
                     </div>
@@ -146,33 +255,62 @@
                             <h3 class="mb-3">Información adicional</h3>
                             <div class="alert alert-success">
                                 <i data-lucide="info" class="me-2"></i>
-                                Reservar con anticipación garantiza la disponibilidad de mesa
+                                Reservar con anticipación garantiza la
+                                disponibilidad de mesa
                             </div>
                             <ul class="list-group list-group-flush mb-4">
-                                <li class="list-group-item d-flex align-items-center">
-                                    <i data-lucide="clock" class="me-3 text-success"></i>
+                                <li
+                                    class="list-group-item d-flex align-items-center"
+                                >
+                                    <i
+                                        data-lucide="clock"
+                                        class="me-3 text-success"
+                                    ></i>
                                     <div>
                                         <strong>Horarios de apertura:</strong>
-                                        <p class="mb-0">Martes a Domingo: 12:00 a 15:00 y 20:00 a 00:00</p>
+                                        <p class="mb-0">
+                                            Martes a Domingo: 12:00 a 15:00 y
+                                            20:00 a 00:00
+                                        </p>
                                     </div>
                                 </li>
-                                <li class="list-group-item d-flex align-items-center">
-                                    <i data-lucide="calendar" class="me-3 text-success"></i>
+                                <li
+                                    class="list-group-item d-flex align-items-center"
+                                >
+                                    <i
+                                        data-lucide="calendar"
+                                        class="me-3 text-success"
+                                    ></i>
                                     <div>
                                         <strong>Reservas:</strong>
-                                        <p class="mb-0">Con un mínimo de 2 horas de anticipación</p>
+                                        <p class="mb-0">
+                                            Con un mínimo de 2 horas de
+                                            anticipación
+                                        </p>
                                     </div>
                                 </li>
-                                <li class="list-group-item d-flex align-items-center">
-                                    <i data-lucide="users" class="me-3 text-success"></i>
+                                <li
+                                    class="list-group-item d-flex align-items-center"
+                                >
+                                    <i
+                                        data-lucide="users"
+                                        class="me-3 text-success"
+                                    ></i>
                                     <div>
                                         <strong>Grupos:</strong>
-                                        <p class="mb-0">Para reservas de más de 6 personas, por favor contáctenos directamente</p>
+                                        <p class="mb-0">
+                                            Para reservas de más de 6 personas,
+                                            por favor contáctenos directamente
+                                        </p>
                                     </div>
                                 </li>
                             </ul>
-                            <img src="multimedia/salon.jpg" alt="Salón del restaurante" class="img-fluid rounded mb-3" 
-                                 onerror="this.src='assets/img/foto-frente.png'">
+                            <img
+                                src="multimedia/salon.jpg"
+                                alt="Salón del restaurante"
+                                class="img-fluid rounded mb-3"
+                                onerror="this.src='assets/img/foto-frente.png'"
+                            />
                         </div>
                     </div>
                 </div>
@@ -231,7 +369,12 @@
         </footer>
 
         <!-- Botón flotante de WhatsApp -->
-        <a href="https://api.whatsapp.com/send?phone=5493517181975" class="whatsapp-float" target="_blank" aria-label="Reservar por WhatsApp">
+        <a
+            href="https://api.whatsapp.com/send?phone=5493517181975"
+            class="whatsapp-float"
+            target="_blank"
+            aria-label="Reservar por WhatsApp"
+        >
             <i class="bi bi-whatsapp"></i>
         </a>
 
