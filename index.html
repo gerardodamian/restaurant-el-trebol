@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Restaurante El Trébol</title>
+
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+
+        <!-- CSS Personalizado -->
+        <link rel="stylesheet" href="style.css" />
+
+        
+        <!-- Iconos de Bootstrap -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    </head>
+    <body>
+        <!-- Header con Bootstrap -->
+        <!-- Versión corregida del navbar para todas las páginas -->
+<header class="bg-white shadow-sm sticky-top">
+    <div class="container py-2">
+        <div class="row align-items-center">
+            <div class="col-md-6 d-flex align-items-center justify-content-center justify-content-md-start">
+                <a href="index.html" class="text-decoration-none">
+                    <img src="assets/img/logo.jpg" alt="Logo Restaurante El Trébol" 
+                         class="me-3 rounded-circle border" width="60" height="60" 
+                         onerror="this.src='https://via.placeholder.com/60/f8f9fa/4caf50?text=ET'">
+                </a>
+                <h1 class="mb-0 text-wrap">Restaurante El Trébol</h1>
+            </div>
+            <div class="col-md-6 mt-2 mt-md-0">
+                <div class="d-flex flex-wrap justify-content-center justify-content-md-end gap-3">
+                    <!-- Menú de navegación -->
+                    <nav class="navbar navbar-expand me-md-2">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" id="nav-inicio" href="index.html">Inicio</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="nav-menu" href="menu.html">Menú</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="nav-reservas" href="reservas.html">Reservas</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="nav-contacto" href="contacto.html">Contacto</a>
+                            </li>
+                        </ul>
+                    </nav>
+
+                    <!-- Botones de acción (versión mejorada) -->
+                    <div class="d-flex gap-2 align-items-center">
+                        <!-- Botón de búsqueda mejorado -->
+                        <button class="btn btn-light d-flex align-items-center" id="searchBtn" type="button">
+                            <i class="bi bi-search me-2"></i>
+                            <span>Buscar</span>
+                        </button>
+                        
+                        <!-- Botón de pedido mejorado con icono y texto visibles -->
+<button class="btn btn-success d-flex align-items-center gap-2 px-3 py-2" id="cartBtn" type="button">
+    <i class="bi bi-cart-fill" style="font-size: 18px;"></i>
+    <span>Pedido</span>
+    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" 
+          id="cartBadge" style="display: none;">0</span>
+</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+        <!-- Contenido principal -->
+        <main class="container py-4">
+            <!-- Imagen destacada con texto superpuesto -->
+            <section class="position-relative mb-5 rounded overflow-hidden">
+                <img
+                    src="https://images.pexels.com/photos/67468/pexels-photo-67468.jpeg"
+                    alt="Restaurante El Trébol"
+                    class="w-100 rounded"
+                    style="
+                        height: 400px;
+                        object-fit: cover;
+                        filter: brightness(0.7);
+                    "
+                />
+                <div
+                    class="position-absolute top-50 start-50 translate-middle text-center text-white"
+                >
+                    <h1 class="display-4 fw-bold">Restaurante El Trébol</h1>
+                    <p class="lead">
+                        Sabores auténticos en un ambiente acogedor
+                    </p>
+                    <a href="menu.html" class="btn btn-success btn-lg mt-2"
+                        >Ver Menú</a
+                    >
+                </div>
+            </section>
+
+            <!-- Sección de platos destacados -->
+            <section class="mb-5">
+                <h2 class="text-success border-bottom pb-2 mb-4">
+                    🍽️ Nuestros Platos Destacados
+                </h2>
+                <div class="row g-4">
+                    <div class="col-md-6 col-lg-3">
+                        <div class="card h-100 shadow-sm hover-effect">
+                            <img
+                                src="https://resizer.glanacion.com/resizer/v2/milanesa-a-la-napolitana-con-guarnicion-de-papas-VLWFAANIWBGPFO4CSUHS7RYVVQ.jpg?auth=335fda04cf2733e39d11ca0ba979c1d0a8a55e6cdec15e4d5b00cfd59fbf9ed8&width=1200&height=800&quality=70&smart=true"
+                                class="card-img-top"
+                                alt="Milanesa Napolitana"
+                                style="height: 180px; object-fit: cover"
+                            />
+                            <div class="card-body">
+                                <h5 class="card-title">Milanesa Napolitana</h5>
+                                <p class="card-text text-muted small">
+                                    Acompañada de papas fritas
+                                </p>
+                            </div>
+                            <div class="card-footer bg-transparent">
+                                <span class="fw-bold text-success">$3800</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="card h-100 shadow-sm hover-effect">
+                            <img
+                                src="https://images.pexels.com/photos/1527603/pexels-photo-1527603.jpeg"
+                                class="card-img-top"
+                                alt="Pasta Casera"
+                                style="height: 180px; object-fit: cover"
+                            />
+                            <div class="card-body">
+                                <h5 class="card-title">Pasta Casera</h5>
+                                <p class="card-text text-muted small">
+                                    Tallarines con salsa de tomate
+                                </p>
+                            </div>
+                            <div class="card-footer bg-transparent">
+                                <span class="fw-bold text-success">$3200</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="card h-100 shadow-sm hover-effect">
+                            <img
+                                src="https://static.wixstatic.com/media/b0cb4b_d64f289576664be3b8bc0442bbeb5a1f~mv2.jpg/v1/fill/w_1000,h_375,al_c,q_85,usm_0.66_1.00_0.01/b0cb4b_d64f289576664be3b8bc0442bbeb5a1f~mv2.jpg"
+                                class="card-img-top"
+                                alt="Bife de Chorizo"
+                                style="height: 180px; object-fit: cover"
+                            />
+                            <div class="card-body">
+                                <h5 class="card-title">Bife de Chorizo</h5>
+                                <p class="card-text text-muted small">
+                                    Con puré o ensalada
+                                </p>
+                            </div>
+                            <div class="card-footer bg-transparent">
+                                <span class="fw-bold text-success">$4800</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="card h-100 shadow-sm hover-effect">
+                            <img
+                                src="https://www.paulinacocina.net/wp-content/uploads/2020/01/receta-de-tiramisu-facil-y-economico-1740483918-1200x675.jpg"
+                                class="card-img-top"
+                                alt="Tiramisú"
+                                style="height: 180px; object-fit: cover"
+                            />
+                            <div class="card-body">
+                                <h5 class="card-title">Tiramisú</h5>
+                                <p class="card-text text-muted small">
+                                    Auténtico postre italiano
+                                </p>
+                            </div>
+                            <div class="card-footer bg-transparent">
+                                <span class="fw-bold text-success">$1800</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Galería de imágenes -->
+            <section class="mb-5">
+                <h2 class="border-bottom pb-2 mb-4">📸 Nuestro Ambiente</h2>
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <img
+                            src="assets/img/foto10.png"
+                            alt="Ambiente del restaurante"
+                            class="img-fluid rounded shadow-sm w-100"
+                            style="height: 250px; object-fit: cover"
+                        />
+                    </div>
+                    <div class="col-md-4">
+                        <img
+                            src="assets/img/foto1.png"
+                            alt="Bar del restaurante"
+                            class="img-fluid rounded shadow-sm w-100"
+                            style="height: 250px; object-fit: cover"
+                        />
+                    </div>
+                    <div class="col-md-4">
+                        <img
+                            src="assets/img/foto11.png"
+                            alt="Terraza del restaurante"
+                            class="img-fluid rounded shadow-sm w-100"
+                            style="height: 250px; object-fit: cover"
+                        />
+                    </div>
+                    <div class="col-md-8">
+                        <img
+                            src="assets/img/foto12.png"
+                            alt="Comedor principal"
+                            class="img-fluid rounded shadow-sm w-100"
+                            style="height: 300px; object-fit: cover"
+                        />
+                    </div>
+                    <div class="col-md-4">
+                        <img
+                            src="assets/img/foto13.png"
+                            alt="Chef preparando platos"
+                            class="img-fluid rounded shadow-sm w-100"
+                            style="height: 300px; object-fit: cover"
+                        />
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sección ¿Dónde estamos? (ya existente) -->
+            <section>
+                <h2 class="border-bottom pb-2 mb-4">📍 ¿Dónde estamos?</h2>
+                <div class="row g-4">
+                    <div class="col-lg-6">
+                        <div class="card shadow-sm">
+                            <img
+                                src="assets/img/foto-frente.png"
+                                alt="Frente del restaurante"
+                                class="card-img-top"
+                                style="height: 250px; object-fit: cover"
+                                onerror="this.src='https://via.placeholder.com/800x400/f8f9fa/4caf50?text=Restaurante+El+Trébol'"
+                            />
+                            <div class="card-body">
+                                <h3 class="h5 card-title">
+                                    Nuestro Restaurante
+                                </h3>
+                                <p class="card-text">
+                                    Te esperamos con la mejor gastronomía y un
+                                    ambiente acogedor.
+                                </p>
+                                <div class="bg-light p-3 rounded">
+                                    <p>
+                                        <strong>Horarios:</strong> Martes a
+                                        Domingo de 12:00 a 15:00 y 20:00 a 00:00
+                                    </p>
+                                    <p>
+                                        <strong>Dirección:</strong> Av.
+                                        Principal 123, Las Talas
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="ratio ratio-4x3 h-100">
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d2482.332721149674!2d-67.07447107301431!3d-28.37249381250385!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x942746608b2e5fed%3A0xf4644d6c554bea2!2sBar%20Comedor%20El%20Tr%C3%A9bol!5e0!3m2!1ses!2sar!4v1749496656157!5m2!1ses!2sar"
+                                width="600"
+                                height="450"
+                                style="border: 0"
+                                allowfullscreen=""
+                                loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade"
+                            ></iframe>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer con Bootstrap -->
+        <footer class="bg-light py-4 mt-auto">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div
+                        class="col-md-6 mb-3 mb-md-0 d-flex align-items-center"
+                    >
+                        <img
+                            src="assets/img/logo.jpg"
+                            alt="Logo"
+                            width="50"
+                            height="50"
+                            class="me-2"
+                            onerror="this.src='https://via.placeholder.com/50/f8f9fa/4caf50?text=ET'"
+                        />
+                        <span class="text-muted"
+                            >© 2025 Restaurante El Trébol</span
+                        >
+                    </div>
+                    <div class="col-md-6">
+                        <ul class="list-inline text-md-end mb-0">
+                            <li class="list-inline-item">
+                                <a href="#" class="text-decoration-none"
+                                    >Política de Privacidad</a
+                                >
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#" class="text-decoration-none"
+                                    >Términos</a
+                                >
+                            </li>
+                            <li class="list-inline-item">
+                                <a
+                                    href="https://api.whatsapp.com/send?phone=5491123456789"
+                                    class="text-decoration-none"
+                                    target="_blank"
+                                >
+                                    <i class="bi bi-whatsapp" style="font-size: 18px;"></i> Reservas
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Modal del carrito (estructura mejorada) -->
+        <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cartModalLabel">
+                    <i class="bi bi-cart-fill me-2"></i>
+                    Tu Pedido
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Carrito vacío -->
+                <div id="emptyCart" class="text-center py-5">
+                    <i class="bi bi-utensils mb-3 text-muted" style="font-size: 48px;"></i>
+                    <p class="lead">Tu pedido está vacío</p>
+                    <span class="text-muted">Agrega platos para continuar</span>
+                </div>
+                
+                <!-- Contenedor para items del carrito -->
+                <div id="cartItems" style="display: none; max-height: 300px; overflow-y: auto;"></div>
+                
+                <!-- Footer del carrito -->
+                <div id="cartFooter" class="mt-3 pt-3 border-top" style="display: none">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="fw-bold">Total:</span>
+                        <span class="fs-4 fw-bold" id="totalAmount">$0</span>
+                    </div>
+                    
+                    <div class="d-flex justify-content-between mb-3">
+                        <button id="clearCartBtn" class="btn btn-outline-danger">
+                            <i class="bi bi-trash me-1"></i> Vaciar pedido
+                        </button>
+                    </div>
+                    
+                    <!-- Información del cliente -->
+                    <div class="bg-light rounded p-3 mb-3">
+                        <h6 class="mb-3">Información para tu pedido:</h6>
+                        
+                        <!-- Nombre del cliente -->
+                        <div class="mb-3">
+                            <label for="inputNombre" class="form-label">Nombre completo</label>
+                            <input type="text" id="inputNombre" class="form-control" placeholder="Tu nombre" required>
+                        </div>
+                        
+                        <!-- Tipo de entrega -->
+                        <div class="mb-3">
+                            <label class="form-label">Tipo de entrega</label>
+                            <div class="d-flex gap-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="tipoEntrega" id="radioDelivery" value="delivery" checked>
+                                    <label class="form-check-label" for="radioDelivery">
+                                        <i class="bi bi-bicycle me-1"></i> Delivery
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="tipoEntrega" id="radioRetiro" value="retiro">
+                                    <label class="form-check-label" for="radioRetiro">
+                                        <i class="bi bi-shop me-1"></i> Retiro en local
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Dirección (solo visible si es delivery) -->
+                        <div id="direccionContainer" class="mb-3">
+                            <label for="inputDireccion" class="form-label">Dirección de entrega</label>
+                            <input type="text" id="inputDireccion" class="form-control" placeholder="Calle, número, piso, depto." required>
+                            <div class="form-text">Incluye referencias para facilitar la entrega</div>
+                        </div>
+                        
+                        <!-- Teléfono -->
+                        <div class="mb-3">
+                            <label for="inputTelefono" class="form-label">Teléfono de contacto</label>
+                            <input type="tel" id="inputTelefono" class="form-control" placeholder="Tu número de teléfono" required>
+                        </div>
+                        
+                        <!-- Comentarios adicionales -->
+                        <div class="mb-0">
+                            <label for="inputComentarios" class="form-label">Comentarios adicionales (opcional)</label>
+                            <textarea id="inputComentarios" class="form-control" rows="2" placeholder="Instrucciones especiales para tu pedido"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-success" id="whatsappBtnFooter">
+                    <i class="bi bi-whatsapp me-1"></i>
+                    Confirmar pedido
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+        <!-- Modal de búsqueda (versión segura) -->
+        <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="searchModalLabel">
+                    <i class="bi bi-search me-2"></i>
+                    Buscar en nuestro menú
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" id="searchInput" placeholder="Ingresa el nombre del plato..." autocomplete="off">
+                    <button class="btn btn-success" id="searchModalBtn">
+                        <i class="bi bi-search me-1"></i> Buscar
+                    </button>
+                </div>
+                <div id="searchResults" class="mt-3">
+                    <!-- Los resultados se mostrarán aquí -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+        <!-- Modal de detalles del producto -->
+        <div class="modal fade" id="productoModal" tabindex="-1" aria-labelledby="productoModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="productoModalLabel">Detalles del plato</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <img id="modalProductoImagen" src="" alt="" class="img-fluid rounded mb-3">
+                            </div>
+                            <div class="col-md-6">
+                                <h3 id="modalProductoTitulo" class="mb-2"></h3>
+                                <p id="modalProductoCategoria" class="badge bg-success mb-3"></p>
+                                <div id="modalProductoPrecio" class="fs-4 mb-3"></div>
+                                <p id="modalProductoDescripcion" class="mb-4"></p>
+                                
+                                <h6 class="border-bottom pb-2">Ingredientes:</h6>
+                                <ul id="modalProductoIngredientes" class="list-unstyled"></ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-primary" id="btnAgregarDesdeModal">
+                            <i class="bi bi-cart-plus me-1" style="font-size: 18px;"></i>
+                            Agregar al pedido
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Botón flotante de WhatsApp -->
+        <a href="https://api.whatsapp.com/send?phone=5491123456789" class="whatsapp-float" target="_blank" aria-label="Reservar por WhatsApp">
+            <i class="bi bi-whatsapp"></i>
+        </a>
+
+        <!-- Scripts esenciales -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="script.js"></script>
+<script src="globalCarrito.js"></script>
+<script src="activePage.js"></script>
+
+<!-- Scripts específicos -->
+<script src="menu.js"></script> <!-- Solo para menu.html -->
+
+<!-- Script de búsqueda (debe estar después de los demás) -->
+<script src="search.js"></script>
+
+<script>
+    // Controlar visibilidad del campo de dirección según tipo de entrega
+    document.addEventListener('DOMContentLoaded', function() {
+        const radioDelivery = document.getElementById('radioDelivery');
+        const radioRetiro = document.getElementById('radioRetiro');
+        const direccionContainer = document.getElementById('direccionContainer');
+        
+        if (radioDelivery && radioRetiro && direccionContainer) {
+            const toggleDireccion = function() {
+                direccionContainer.style.display = radioDelivery.checked ? 'block' : 'none';
+            };
+            
+            radioDelivery.addEventListener('change', toggleDireccion);
+            radioRetiro.addEventListener('change', toggleDireccion);
+            
+            // Configurar estado inicial
+            toggleDireccion();
+        }
+    });
+</script>
+    </body>
+</html>

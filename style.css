@@ -1,0 +1,400 @@
+/* Estilos generales */
+:root {
+    --primary-color: #4caf50;
+    --accent-color: #8bc34a;
+    --dark-color: #2e7d32;
+    --light-color: #e8f5e9;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header */
+header h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 1.2rem;
+    }
+}
+
+/* Estilos de tarjetas */
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.producto-titulo {
+    font-size: 1rem;
+    font-weight: 600;
+    height: 2.5rem;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+/* Botón flotante de WhatsApp */
+.whatsapp-float {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: #25d366;
+    color: #FFF;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 30px;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s;
+}
+
+.whatsapp-float:hover {
+    background-color: #128C7E;
+    color: #FFF;
+    transform: scale(1.1);
+}
+
+/* Estilos para resaltar ofertas */
+.border-warning {
+    border-width: 2px;
+}
+
+/* Modal de carrito */
+#cartItems {
+    max-height: 50vh;
+    overflow-y: auto;
+}
+
+/* Personalización de Bootstrap */
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-primary:hover, .btn-primary:focus {
+    background-color: var(--dark-color);
+    border-color: var(--dark-color);
+}
+
+.btn-outline-success {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-outline-success:hover {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-success {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-success:hover {
+    background-color: var(--dark-color);
+    border-color: var(--dark-color);
+}
+
+.bg-success {
+    background-color: var(--primary-color) !important;
+}
+
+.text-success {
+    color: var(--primary-color) !important;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card {
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* Estilos para el modal de producto */
+#modalProductoImagen {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.modal-body {
+    padding: 1.5rem;
+}
+
+#modalProductoIngredientes li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+#modalProductoCategoria {
+    font-size: 0.9rem;
+    padding: 0.35rem 0.65rem;
+}
+
+/* Animación para el modal */
+.modal.fade .modal-dialog {
+    transition: transform 0.3s ease-out;
+    transform: scale(0.95);
+}
+
+.modal.show .modal-dialog {
+    transform: scale(1);
+}
+
+/* Cursor para tarjetas interactivas */
+.similar-plato {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.similar-plato:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo para el botón de test */
+.btn-warning {
+    background-color: #ffc107;
+    border-color: #ffc107;
+}
+
+.btn-warning:hover {
+    background-color: #e0a800;
+    border-color: #d39e00;
+}
+
+/* Estilos para la barra de búsqueda en el header */
+@media (max-width: 992px) {
+    .navbar form.d-flex {
+        width: 100%;
+        max-width: none !important;
+        margin: 0.5rem 0;
+    }
+}
+
+/* Efecto de hover en las tarjetas */
+.card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo para el badge del carrito */
+#cartBadge {
+    transform: translate(-50%, -50%) !important;
+}
+
+/* Estilos para el botón de carrito */
+#cartBtn {
+    min-width: 110px; /* Ancho mínimo para asegurar que el texto quepa */
+    padding: 8px 15px; /* Padding horizontal y vertical aumentado */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px; /* Espacio entre icono y texto */
+    font-weight: 500;
+    border-radius: 6px; /* Bordes ligeramente redondeados */
+    transition: all 0.3s ease;
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    position: relative; /* Para el badge */
+}
+
+#cartBtn:hover {
+    background-color: var(--dark-color);
+    border-color: var(--dark-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+#cartBtn i {
+    font-size: 19px; /* Tamaño de icono aumentado */
+}
+
+/* Asegurarse que los botones tienen altura consistente */
+#searchBtn, #cartBtn {
+    height: auto; /* Cambiado de altura fija a auto */
+    min-height: 38px;
+}
+
+/* Estilo para el badge del carrito */
+#cartBadge {
+    font-size: 0.75rem;
+    transform: translate(-50%, -30%);
+}
+
+/* Animación para el badge del carrito */
+@keyframes pulse {
+    0% { transform: translate(-50%, -30%) scale(1); }
+    50% { transform: translate(-50%, -30%) scale(1.2); }
+    100% { transform: translate(-50%, -30%) scale(1); }
+}
+
+#cartBadge {
+    animation: pulse 1s ease-in-out;
+}
+
+/* Estilo para cuando hay items en el carrito */
+.cart-has-items {
+    animation: shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+@keyframes shake {
+    10%, 90% { transform: translate3d(-1px, 0, 0); }
+    20%, 80% { transform: translate3d(1px, 0, 0); }
+    30%, 50%, 70% { transform: translate3d(-2px, 0, 0); }
+    40%, 60% { transform: translate3d(2px, 0, 0); }
+}
+
+/* Mejora para el encabezado */
+.nav-link {
+    font-weight: 500;
+    padding: 0.5rem 0.8rem;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.nav-link:hover, .nav-link.active {
+    color: #28a745 !important;
+    background-color: rgba(40, 167, 69, 0.08);
+}
+
+/* Mejorar estilos de los modales */
+.modal-header {
+    border-bottom: 3px solid #f8f9fa;
+}
+
+.modal-body {
+    padding: 1.5rem;
+}
+
+/* Estilos para el resaltado de búsqueda */
+.highlight {
+    background-color: rgba(255, 230, 0, 0.3);
+    padding: 0.1rem 0;
+}
+
+/* Estilo mejorado para el botón de eliminar en el carrito */
+.remove-item {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+    z-index: 5;
+    position: relative;
+}
+
+.remove-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+}
+
+/* Estilo para los elementos del carrito */
+.cart-item {
+    border-bottom: 1px solid #dee2e6;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    position: relative;
+    transition: background-color 0.2s;
+}
+
+.cart-item:hover {
+    background-color: rgba(0,0,0,0.02);
+}
+
+.cart-item .remove-item {
+    min-width: 38px;
+    min-height: 38px;
+    color: white;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .cart-item .remove-item i {
+    color: white;
+  }
+
+/* Corrección para problemas del modal */
+.modal-backdrop {
+    z-index: 1040 !important;
+}
+
+.modal-backdrop.show {
+    opacity: 0.5;
+}
+
+.modal {
+    z-index: 1050 !important;
+}
+
+/* Evitar problemas de scroll */
+body.modal-open {
+    overflow: auto !important;
+    padding-right: 0 !important;
+}
+
+/* Estilos para el formulario del carrito */
+#cartFooter .form-label {
+    font-weight: 500;
+    font-size: 0.95rem;
+    margin-bottom: 0.25rem;
+}
+
+#cartFooter .bg-light {
+    background-color: #f8f9fa !important;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* Animación para los campos del formulario */
+#cartFooter .form-control:focus {
+    border-color: #28a745;
+    box-shadow: 0 0 0 0.25rem rgba(40, 167, 69, 0.25);
+}
+
+/* Estilo para los radio buttons */
+#cartFooter .form-check-input:checked {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+/* Mejora de la accesibilidad */
+#cartFooter .form-text {
+    font-size: 0.8rem;
+    color: #6c757d;
+}
