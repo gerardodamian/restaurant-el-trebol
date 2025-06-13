@@ -26,104 +26,47 @@
     <body>
         <!-- Header con Bootstrap -->
         <!-- Versión corregida del navbar para todas las páginas -->
-        <header class="bg-white shadow-sm sticky-top">
-            <div class="container py-2">
-                <div class="row align-items-center">
-                    <div
-                        class="col-md-6 d-flex align-items-center justify-content-center justify-content-md-start"
-                    >
-                        <a href="index.html" class="text-decoration-none">
-                            <img
-                                src="assets/img/logo.jpg"
-                                alt="Logo Restaurante El Trébol"
-                                class="me-3 rounded-circle border"
-                                width="60"
-                                height="60"
-                                onerror="this.src='https://via.placeholder.com/60/f8f9fa/4caf50?text=ET'"
-                            />
-                        </a>
-                        <h1 class="mb-0 text-wrap">Restaurante El Trébol</h1>
-                    </div>
-                    <div class="col-md-6 mt-2 mt-md-0">
-                        <div
-                            class="d-flex flex-wrap justify-content-center justify-content-md-end gap-2"
-                        >
-                            <!-- Menú de navegación -->
-                            <nav class="navbar navbar-expand me-md-3">
-                                <ul class="navbar-nav">
-                                    <li class="nav-item">
-                                        <a
-                                            class="nav-link"
-                                            id="nav-inicio"
-                                            href="index.html"
-                                            >Inicio</a
-                                        >
-                                    </li>
-                                    <li class="nav-item">
-                                        <a
-                                            class="nav-link"
-                                            id="nav-menu"
-                                            href="menu.html"
-                                            >Menú</a
-                                        >
-                                    </li>
-                                    <li class="nav-item">
-                                        <a
-                                            class="nav-link"
-                                            id="nav-reservas"
-                                            href="reservas.html"
-                                            >Reservas</a
-                                        >
-                                    </li>
-                                    <li class="nav-item">
-                                        <a
-                                            class="nav-link"
-                                            id="nav-contacto"
-                                            href="contacto.html"
-                                            >Contacto</a
-                                        >
-                                    </li>
-                                </ul>
-                            </nav>
-
-                            <!-- Botones de acción -->
-                            <button
-                                class="btn btn-outline-secondary d-flex align-items-center"
-                                id="searchBtn"
-                                type="button"
-                            >
-                                <i
-                                    data-lucide="search"
-                                    class="me-2"
-                                    width="18"
-                                    height="18"
-                                ></i>
-                                <span>Buscar</span>
-                            </button>
-                            <button
-                                class="btn btn-outline-success d-flex align-items-center position-relative"
-                                id="cartBtn"
-                                type="button"
-                            >
-                                <i
-                                    data-lucide="shopping-cart"
-                                    class="me-2"
-                                    width="18"
-                                    height="18"
-                                ></i>
-                                <span>Pedido</span>
-                                <span
-                                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
-                                    id="cartBadge"
-                                    style="display: none"
-                                    >0</span
-                                >
-                            </button>
-                        </div>
-                    </div>
-                </div>
+        <!-- Header con Bootstrap -->
+<header class="bg-white shadow-sm sticky-top">
+    <div class="container py-2">
+        <div class="row align-items-center">
+            <div
+                class="col-md-6 d-flex align-items-center justify-content-center justify-content-md-start"
+            >
+                <a href="index.html" class="text-decoration-none">
+                    <img
+                        src="assets/img/logo.jpg"
+                        alt="Logo Restaurante El Trébol"
+                        class="me-3 rounded-circle border"
+                        width="60"
+                        height="60"
+                        onerror="this.src='https://via.placeholder.com/60/f8f9fa/4caf50?text=ET'"
+                    />
+                </a>
+                <h1 class="mb-0 text-wrap">Restaurante El Trébol</h1>
             </div>
-        </header>
+            <div class="col-md-6 mt-2 mt-md-0">
+                <nav class="navbar navbar-expand justify-content-center justify-content-md-end">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" id="nav-inicio" href="index.html">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="nav-menu" href="menu.html">Menú</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="nav-reservas" href="reservas.html">Reservas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="nav-contacto" href="contacto.html">Contacto</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
 
         <!-- Contenido principal -->
         <main class="container py-4">

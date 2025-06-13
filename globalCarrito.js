@@ -3,68 +3,109 @@
  */
 
 // Carrito de compras global
-window.carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+window.carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
 // Contador de inicializaciones para evitar duplicados
 let initCount = 0;
 
 // Inicialización única
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener("DOMContentLoaded", function () {
     if (initCount > 0) return;
     initCount++;
-    
-    console.log('Inicializando carrito global');
+
+    console.log("Inicializando carrito global");
     actualizarContadorCarrito();
     setupModalHandlers();
+    setupDeliveryHandlers();
 });
+
+// Configurar manejadores para mostrar/ocultar dirección según tipo de entrega
+function setupDeliveryHandlers() {
+    const radioDelivery = document.getElementById("radioDelivery");
+    const radioRetiro = document.getElementById("radioRetiro");
+    const direccionGroup = document.getElementById("direccionGroup");
+
+    if (radioDelivery && radioRetiro && direccionGroup) {
+        // Función para mostrar/ocultar dirección
+        function toggleDireccion() {
+            if (radioDelivery.checked) {
+                direccionGroup.style.display = "block";
+                // Hacer el campo requerido
+                const inputDireccion =
+                    document.getElementById("inputDireccion");
+                if (inputDireccion) {
+                    inputDireccion.required = true;
+                }
+            } else {
+                direccionGroup.style.display = "none";
+                // Quitar el requerimiento y limpiar el campo
+                const inputDireccion =
+                    document.getElementById("inputDireccion");
+                if (inputDireccion) {
+                    inputDireccion.required = false;
+                    inputDireccion.value = "";
+                }
+            }
+        }
+
+        // Agregar eventos a los radio buttons
+        radioDelivery.addEventListener("change", toggleDireccion);
+        radioRetiro.addEventListener("change", toggleDireccion);
+
+        // Ejecutar al cargar para establecer el estado inicial
+        toggleDireccion();
+    }
+}
 
 // Configurar manejadores del modal una sola vez
 function setupModalHandlers() {
-    const cartBtn = document.getElementById('cartBtn');
-    const cartModalElement = document.getElementById('cartModal');
-    
+    const cartBtn = document.getElementById("cartBtn");
+    const cartModalElement = document.getElementById("cartModal");
+
     // Si no existe el botón o modal, salir
     if (!cartBtn || !cartModalElement) return;
-    
+
     // Remover todos los event listeners antiguos
     const newCartBtn = cartBtn.cloneNode(true);
     cartBtn.parentNode.replaceChild(newCartBtn, cartBtn);
-    
+
     // Agregar nuevo event listener
-    newCartBtn.addEventListener('click', function() {
+    newCartBtn.addEventListener("click", function () {
         const bsModal = new bootstrap.Modal(cartModalElement);
         bsModal.show();
     });
-    
+
     // Manejar apertura del modal
-    cartModalElement.addEventListener('shown.bs.modal', function() {
+    cartModalElement.addEventListener("shown.bs.modal", function () {
         actualizarCarritoModal();
+        // Configurar el estado inicial de la dirección al abrir el modal
+        setupDeliveryHandlers();
     });
-    
+
     // Manejar cierre del modal de manera segura
-    cartModalElement.addEventListener('hidden.bs.modal', function() {
+    cartModalElement.addEventListener("hidden.bs.modal", function () {
         // Limpiar contenido después de cerrar para evitar problemas
         setTimeout(() => {
-            const cartItems = document.getElementById('cartItems');
-            if (cartItems) cartItems.innerHTML = '';
+            const cartItems = document.getElementById("cartItems");
+            if (cartItems) cartItems.innerHTML = "";
         }, 100);
     });
-    
+
     // Configurar botón de vaciar carrito
-    const clearCartBtn = document.getElementById('clearCartBtn');
+    const clearCartBtn = document.getElementById("clearCartBtn");
     if (clearCartBtn) {
-        clearCartBtn.addEventListener('click', function() {
-            if (confirm('¿Estás seguro de que quieres vaciar tu pedido?')) {
+        clearCartBtn.addEventListener("click", function () {
+            if (confirm("¿Estás seguro de que quieres vaciar tu pedido?")) {
                 vaciarCarrito();
-                mostrarNotificacionExito('Tu pedido ha sido vaciado');
+                mostrarNotificacionExito("Tu pedido ha sido vaciado");
             }
         });
     }
-    
+
     // Configurar botón WhatsApp si existe
-    const whatsappBtnFooter = document.getElementById('whatsappBtnFooter');
+    const whatsappBtnFooter = document.getElementById("whatsappBtnFooter");
     if (whatsappBtnFooter) {
-        whatsappBtnFooter.addEventListener('click', function(e) {
+        whatsappBtnFooter.addEventListener("click", function (e) {
             e.preventDefault();
             enviarPedidoPorWhatsApp();
         });
@@ -73,103 +114,129 @@ function setupModalHandlers() {
 
 // Función para actualizar el contador del carrito
 function actualizarContadorCarrito() {
-    const badge = document.getElementById('cartBadge');
+    const badge = document.getElementById("cartBadge");
     if (!badge) return;
-    
-    const totalItems = window.carrito.reduce((sum, item) => sum + (item.cantidad || 1), 0);
-    
+
+    const totalItems = window.carrito.reduce(
+        (sum, item) => sum + (item.cantidad || 1),
+        0
+    );
+
     if (totalItems > 0) {
         badge.textContent = totalItems;
-        badge.style.display = 'inline-block';
+        badge.style.display = "inline-block";
     } else {
-        badge.style.display = 'none';
+        badge.style.display = "none";
     }
 }
 
 // Función para agregar un producto al carrito
-window.agregarAlCarrito = function(producto) {
+window.agregarAlCarrito = function (producto) {
     // Verificar si el producto ya está en el carrito
-    const index = window.carrito.findIndex(item => item.id === producto.id);
-    
+    const index = window.carrito.findIndex((item) => item.id === producto.id);
+
     if (index !== -1) {
         // Si ya existe, aumentar cantidad
-        window.carrito[index].cantidad = (window.carrito[index].cantidad || 1) + 1;
+        window.carrito[index].cantidad =
+            (window.carrito[index].cantidad || 1) + 1;
     } else {
         // Si no existe, agregarlo con cantidad 1
-        const nuevoItem = {...producto, cantidad: 1};
+        const nuevoItem = { ...producto, cantidad: 1 };
         window.carrito.push(nuevoItem);
     }
-    
+
     // Guardar en localStorage
-    localStorage.setItem('carrito', JSON.stringify(window.carrito));
-    
+    localStorage.setItem("carrito", JSON.stringify(window.carrito));
+
     // Actualizar contador de items
     actualizarContadorCarrito();
-    
+
     // Actualizar el modal si está abierto
-    if (document.querySelector('#cartModal.show')) {
+    if (document.querySelector("#cartModal.show")) {
         actualizarCarritoModal();
     }
-    
+
     return true;
 };
 
 // Función para actualizar el carrito modal
 function actualizarCarritoModal() {
-    const cartItems = document.getElementById('cartItems');
-    const emptyCart = document.getElementById('emptyCart');
-    const cartFooter = document.getElementById('cartFooter');
-    const totalAmount = document.getElementById('totalAmount');
-    
+    const cartItems = document.getElementById("cartItems");
+    const emptyCart = document.getElementById("emptyCart");
+    const cartFooter = document.getElementById("cartFooter");
+    const totalAmount = document.getElementById("totalAmount");
+
     // Si no hay items en el carrito o no hay elementos en el DOM
-    if (!window.carrito || window.carrito.length === 0 || !cartItems || !emptyCart || !cartFooter) {
-        if (emptyCart) emptyCart.style.display = 'block';
-        if (cartItems) cartItems.style.display = 'none';
-        if (cartFooter) cartFooter.style.display = 'none';
+    if (
+        !window.carrito ||
+        window.carrito.length === 0 ||
+        !cartItems ||
+        !emptyCart ||
+        !cartFooter
+    ) {
+        if (emptyCart) emptyCart.style.display = "block";
+        if (cartItems) cartItems.style.display = "none";
+        if (cartFooter) cartFooter.style.display = "none";
         return;
     }
-    
+
     // Mostrar items y ocultar mensaje de carrito vacío
-    emptyCart.style.display = 'none';
-    cartItems.style.display = 'block';
-    cartFooter.style.display = 'block';
-    
+    emptyCart.style.display = "none";
+    cartItems.style.display = "block";
+    cartFooter.style.display = "block";
+
     // Limpiar carrito actual
-    cartItems.innerHTML = '';
-    
+    cartItems.innerHTML = "";
+
     // Añadir cada producto al carrito
     let total = 0;
-    
-    window.carrito.forEach(item => {
+
+    window.carrito.forEach((item) => {
         const subtotal = (item.price || item.precio) * (item.cantidad || 1);
         total += subtotal;
-        
+
         // Crear elemento para el producto
-        const itemElement = document.createElement('div');
-        itemElement.className = 'cart-item mb-3 pb-3 border-bottom';
-        
+        const itemElement = document.createElement("div");
+        itemElement.className = "cart-item mb-3 pb-3 border-bottom";
+
         // Generar imagen (usando placeholder si no hay imagen)
-        const imgSrc = item.image || item.imagen || 
-                      `https://via.placeholder.com/50x50/28a745/ffffff?text=${encodeURIComponent((item.name || item.nombre || '').charAt(0))}`;
-        
+        const imgSrc =
+            item.image ||
+            item.imagen ||
+            `https://via.placeholder.com/50x50/28a745/ffffff?text=${encodeURIComponent(
+                (item.name || item.nombre || "").charAt(0)
+            )}`;
+
         // Crear HTML del item
         itemElement.innerHTML = `
             <div class="row align-items-center">
                 <div class="col-3">
-                    <img src="${imgSrc}" alt="${item.name || item.nombre}" class="img-fluid rounded"
+                    <img src="${imgSrc}" alt="${
+            item.name || item.nombre
+        }" class="img-fluid rounded"
                          style="width: 60px; height: 60px; object-fit: cover;"
-                         onerror="this.src='https://via.placeholder.com/60x60/28a745/ffffff?text=${encodeURIComponent((item.name || item.nombre || '').charAt(0))}'">
+                         onerror="this.src='https://via.placeholder.com/60x60/28a745/ffffff?text=${encodeURIComponent(
+                             (item.name || item.nombre || "").charAt(0)
+                         )}'">
                 </div>
                 <div class="col-6">
                     <h6 class="mb-1">${item.name || item.nombre}</h6>
                     <div class="d-flex align-items-center">
-                        <span class="text-muted me-2">$${item.price || item.precio}</span>
+                        <span class="text-muted me-2">$${
+                            item.price || item.precio
+                        }</span>
                         <div class="btn-group btn-group-sm" role="group">
-                            <button type="button" class="btn btn-outline-secondary decrease-btn" data-id="${item.id}">
+                            <button type="button" class="btn btn-outline-secondary decrease-btn" data-id="${
+                                item.id
+                            }">
                                 <i class="bi bi-dash"></i>
                             </button>
-                            <span class="btn btn-outline-secondary disabled">${item.cantidad || 1}</span>
-                            <button type="button" class="btn btn-outline-secondary increase-btn" data-id="${item.id}">
+                            <span class="btn btn-outline-secondary disabled">${
+                                item.cantidad || 1
+                            }</span>
+                            <button type="button" class="btn btn-outline-secondary increase-btn" data-id="${
+                                item.id
+                            }">
                                 <i class="bi bi-plus"></i>
                             </button>
                         </div>
@@ -177,34 +244,36 @@ function actualizarCarritoModal() {
                 </div>
                 <div class="col-3 text-end">
                     <div class="fw-bold mb-2">$${subtotal}</div>
-                    <button type="button" class="btn btn-danger btn-sm delete-btn" data-id="${item.id}">
+                    <button type="button" class="btn btn-danger btn-sm delete-btn" data-id="${
+                        item.id
+                    }">
                         <i class="bi bi-trash-fill"></i>
                     </button>
                 </div>
             </div>
         `;
-        
+
         // Agregar al contenedor
         cartItems.appendChild(itemElement);
-        
+
         // Agregar eventos directamente al crear el elemento
-        const decreaseBtn = itemElement.querySelector('.decrease-btn');
-        const increaseBtn = itemElement.querySelector('.increase-btn');
-        const deleteBtn = itemElement.querySelector('.delete-btn');
-        
-        decreaseBtn.addEventListener('click', function() {
+        const decreaseBtn = itemElement.querySelector(".decrease-btn");
+        const increaseBtn = itemElement.querySelector(".increase-btn");
+        const deleteBtn = itemElement.querySelector(".delete-btn");
+
+        decreaseBtn.addEventListener("click", function () {
             disminuirCantidad(item.id);
         });
-        
-        increaseBtn.addEventListener('click', function() {
+
+        increaseBtn.addEventListener("click", function () {
             aumentarCantidad(item.id);
         });
-        
-        deleteBtn.addEventListener('click', function() {
+
+        deleteBtn.addEventListener("click", function () {
             eliminarDelCarrito(item.id);
         });
     });
-    
+
     // Actualizar el total
     totalAmount.textContent = `$${total}`;
 }
@@ -212,24 +281,26 @@ function actualizarCarritoModal() {
 // Función para eliminar un producto del carrito
 function eliminarDelCarrito(id) {
     // Encontrar el producto antes de eliminarlo
-    const producto = window.carrito.find(item => item.id === id);
-    const nombre = producto ? (producto.name || producto.nombre || 'Producto') : 'Producto';
-    
+    const producto = window.carrito.find((item) => item.id === id);
+    const nombre = producto
+        ? producto.name || producto.nombre || "Producto"
+        : "Producto";
+
     // Eliminar del carrito
-    window.carrito = window.carrito.filter(item => item.id !== id);
-    localStorage.setItem('carrito', JSON.stringify(window.carrito));
-    
+    window.carrito = window.carrito.filter((item) => item.id !== id);
+    localStorage.setItem("carrito", JSON.stringify(window.carrito));
+
     // Actualizar interfaz
     actualizarCarritoModal();
     actualizarContadorCarrito();
-    
+
     // Notificación simple
     console.log(`${nombre} eliminado del carrito`);
 }
 
 // Funciones para modificar la cantidad
 function disminuirCantidad(id) {
-    const index = window.carrito.findIndex(item => item.id === id);
+    const index = window.carrito.findIndex((item) => item.id === id);
     if (index !== -1) {
         if (window.carrito[index].cantidad > 1) {
             window.carrito[index].cantidad--;
@@ -237,17 +308,18 @@ function disminuirCantidad(id) {
             eliminarDelCarrito(id);
             return;
         }
-        localStorage.setItem('carrito', JSON.stringify(window.carrito));
+        localStorage.setItem("carrito", JSON.stringify(window.carrito));
         actualizarCarritoModal();
         actualizarContadorCarrito();
     }
 }
 
 function aumentarCantidad(id) {
-    const index = window.carrito.findIndex(item => item.id === id);
+    const index = window.carrito.findIndex((item) => item.id === id);
     if (index !== -1) {
-        window.carrito[index].cantidad = (window.carrito[index].cantidad || 1) + 1;
-        localStorage.setItem('carrito', JSON.stringify(window.carrito));
+        window.carrito[index].cantidad =
+            (window.carrito[index].cantidad || 1) + 1;
+        localStorage.setItem("carrito", JSON.stringify(window.carrito));
         actualizarCarritoModal();
         actualizarContadorCarrito();
     }
@@ -256,37 +328,39 @@ function aumentarCantidad(id) {
 // Función para enviar pedido por WhatsApp
 function enviarPedidoPorWhatsApp() {
     if (window.carrito.length === 0) {
-        alert('Tu pedido está vacío');
+        alert("Tu pedido está vacío");
         return;
     }
-    
+
     // Obtener datos del formulario
-    const nombre = document.getElementById('inputNombre')?.value || '';
-    const telefono = document.getElementById('inputTelefono')?.value || '';
-    const comentarios = document.getElementById('inputComentarios')?.value || '';
-    
+    const nombre = document.getElementById("inputNombre")?.value || "";
+    const telefono = document.getElementById("inputTelefono")?.value || "";
+    const comentarios =
+        document.getElementById("inputComentarios")?.value || "";
+
     // Verificar si los campos requeridos están completos
     if (!nombre) {
-        alert('Por favor, ingresa tu nombre');
-        document.getElementById('inputNombre').focus();
+        alert("Por favor, ingresa tu nombre");
+        document.getElementById("inputNombre").focus();
         return;
     }
-    
+
     // Obtener tipo de entrega
-    const esDelivery = document.getElementById('radioDelivery')?.checked || false;
-    const tipoEntrega = esDelivery ? 'Delivery' : 'Retiro en local';
-    
+    const esDelivery =
+        document.getElementById("radioDelivery")?.checked || false;
+    const tipoEntrega = esDelivery ? "Delivery" : "Retiro en local";
+
     // Obtener dirección (solo si es delivery)
-    let direccion = '';
+    let direccion = "";
     if (esDelivery) {
-        direccion = document.getElementById('inputDireccion')?.value || '';
+        direccion = document.getElementById("inputDireccion")?.value || "";
         if (!direccion) {
-            alert('Por favor, ingresa tu dirección de entrega');
-            document.getElementById('inputDireccion').focus();
+            alert("Por favor, ingresa tu dirección de entrega");
+            document.getElementById("inputDireccion").focus();
             return;
         }
     }
-    
+
     // Construir mensaje
     let mensaje = `*Nuevo Pedido desde Web*\n`;
     mensaje += `*Cliente:* ${nombre}\n`;
@@ -294,59 +368,72 @@ function enviarPedidoPorWhatsApp() {
         mensaje += `*Teléfono:* ${telefono}\n`;
     }
     mensaje += `*Tipo de entrega:* ${tipoEntrega}\n`;
-    
+
     if (esDelivery) {
         mensaje += `*Dirección:* ${direccion}\n`;
     }
-    
+
     if (comentarios) {
         mensaje += `*Comentarios:* ${comentarios}\n`;
     }
-    
+
     mensaje += `\n*Pedido:*\n`;
-    
+
     // Agregar items
     let total = 0;
-    window.carrito.forEach(item => {
+    window.carrito.forEach((item) => {
         const precio = item.price || item.precio || 0;
         const cantidad = item.cantidad || 1;
         const subtotal = precio * cantidad;
         total += subtotal;
-        
-        mensaje += `• ${cantidad}x ${item.name || item.nombre} - $${subtotal}\n`;
+
+        mensaje += `• ${cantidad}x ${
+            item.name || item.nombre
+        } - $${subtotal}\n`;
     });
-    
+
     mensaje += `\n*Total:* $${total}`;
-    
+
     if (esDelivery) {
         mensaje += `\n\n_Los tiempos de entrega varían según la zona. Te confirmaremos por WhatsApp._`;
     } else {
         mensaje += `\n\n_Tu pedido estará listo para retirar en aproximadamente 25 minutos._`;
     }
-    
+
     // Codificar para URL
     const mensajeCodificado = encodeURIComponent(mensaje);
-    const telefonoRestaurante = '5493517181975'; // Reemplazar con el número del restaurante
-    
+    const telefonoRestaurante = "5493517181975"; // Reemplazar con el número del restaurante
+
     // Preguntar al usuario si desea confirmar
-    if (confirm('¿Confirmar tu pedido? Te redirigiremos a WhatsApp para finalizar.')) {
+    if (
+        confirm(
+            "¿Confirmar tu pedido? Te redirigiremos a WhatsApp para finalizar."
+        )
+    ) {
         // Abrir WhatsApp en una nueva ventana
-        const whatsappWindow = window.open(`https://wa.me/${telefonoRestaurante}?text=${mensajeCodificado}`, '_blank');
-        
+        const whatsappWindow = window.open(
+            `https://wa.me/${telefonoRestaurante}?text=${mensajeCodificado}`,
+            "_blank"
+        );
+
         // Cuando se abre la ventana de WhatsApp, limpiamos el carrito
         if (whatsappWindow) {
             // Vaciar el carrito
             vaciarCarrito();
-            
+
             // Mostrar mensaje de éxito
-            mostrarNotificacionExito('¡Pedido enviado con éxito!');
-            
+            mostrarNotificacionExito("¡Pedido enviado con éxito!");
+
             // Cerrar modal automáticamente
-            const cartModal = bootstrap.Modal.getInstance(document.getElementById('cartModal'));
+            const cartModal = bootstrap.Modal.getInstance(
+                document.getElementById("cartModal")
+            );
             if (cartModal) cartModal.hide();
         } else {
             // Si el navegador bloqueó la ventana emergente
-            alert('Por favor, permite ventanas emergentes para continuar con tu pedido por WhatsApp');
+            alert(
+                "Por favor, permite ventanas emergentes para continuar con tu pedido por WhatsApp"
+            );
         }
     }
 }
@@ -355,44 +442,54 @@ function enviarPedidoPorWhatsApp() {
 function vaciarCarrito() {
     // Vaciar el array del carrito
     window.carrito = [];
-    
+
     // Actualizar el localStorage
-    localStorage.setItem('carrito', JSON.stringify(window.carrito));
-    
+    localStorage.setItem("carrito", JSON.stringify(window.carrito));
+
     // Actualizar la interfaz
     actualizarContadorCarrito();
-    
+
     // Si el modal está abierto, actualizar su contenido
-    const cartItems = document.getElementById('cartItems');
-    const emptyCart = document.getElementById('emptyCart');
-    const cartFooter = document.getElementById('cartFooter');
-    
+    const cartItems = document.getElementById("cartItems");
+    const emptyCart = document.getElementById("emptyCart");
+    const cartFooter = document.getElementById("cartFooter");
+
     if (cartItems && emptyCart && cartFooter) {
-        cartItems.innerHTML = '';
-        cartItems.style.display = 'none';
-        emptyCart.style.display = 'block';
-        cartFooter.style.display = 'none';
+        cartItems.innerHTML = "";
+        cartItems.style.display = "none";
+        emptyCart.style.display = "block";
+        cartFooter.style.display = "none";
     }
-    
+
     // Limpiar campos del formulario
-    const inputNombre = document.getElementById('inputNombre');
-    const inputDireccion = document.getElementById('inputDireccion');
-    const inputTelefono = document.getElementById('inputTelefono');
-    const inputComentarios = document.getElementById('inputComentarios');
-    
-    if (inputNombre) inputNombre.value = '';
-    if (inputDireccion) inputDireccion.value = '';
-    if (inputTelefono) inputTelefono.value = '';
-    if (inputComentarios) inputComentarios.value = '';
+    const inputNombre = document.getElementById("inputNombre");
+    const inputDireccion = document.getElementById("inputDireccion");
+    const inputTelefono = document.getElementById("inputTelefono");
+    const inputComentarios = document.getElementById("inputComentarios");
+
+    if (inputNombre) inputNombre.value = "";
+    if (inputDireccion) inputDireccion.value = "";
+    if (inputTelefono) inputTelefono.value = "";
+    if (inputComentarios) inputComentarios.value = "";
+
+    // Resetear los radio buttons al valor por defecto (retiro en local)
+    const radioRetiro = document.getElementById("radioRetiro");
+    const radioDelivery = document.getElementById("radioDelivery");
+    if (radioRetiro) radioRetiro.checked = true;
+    if (radioDelivery) radioDelivery.checked = false;
+
+    // Ocultar el campo de dirección
+    const direccionGroup = document.getElementById("direccionGroup");
+    if (direccionGroup) direccionGroup.style.display = "none";
 }
 
 // Función para mostrar una notificación de éxito
 function mostrarNotificacionExito(mensaje) {
     // Crear el toast
-    const toastContainer = document.createElement('div');
-    toastContainer.className = 'position-fixed bottom-0 end-0 p-3';
-    toastContainer.style.zIndex = '11';
-    
+    const toastContainer = document.createElement("div");
+    toastContainer.className = "position-fixed bottom-0 end-0 p-3";
+    toastContainer.style.zIndex = "11";
+
     toastContainer.innerHTML = `
         <div class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="d-flex">
@@ -404,19 +501,19 @@ function mostrarNotificacionExito(mensaje) {
             </div>
         </div>
     `;
-    
+
     // Agregar al cuerpo del documento
     document.body.appendChild(toastContainer);
-    
+
     // Inicializar el toast
-    const toast = new bootstrap.Toast(toastContainer.querySelector('.toast'));
+    const toast = new bootstrap.Toast(toastContainer.querySelector(".toast"));
     toast.show();
-    
+
     // Eliminar después de cerrado
-    toastContainer.addEventListener('hidden.bs.toast', function() {
+    toastContainer.addEventListener("hidden.bs.toast", function () {
         this.remove();
     });
-    
+
     // También eliminar automáticamente después de 5 segundos
     setTimeout(() => {
         toastContainer.remove();
