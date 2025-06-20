@@ -3,7 +3,7 @@
  * Previene errores de replaceChild con elementos null
  */
 
-console.log("🔧 Iniciando corrección de eventos...");
+
 
 // Función para clonar elemento de forma segura
 function safeCloneElement(element) {
@@ -24,11 +24,11 @@ function safeCloneElement(element) {
 
 // Función para resetear eventos de botones de forma segura
 function resetButtonEvents() {
-    console.log("🔄 Reseteando eventos de botones...");
+    
 
     // Resetear botones de agregar al carrito
     const botonesAgregar = document.querySelectorAll(".btn-agregar");
-    console.log(`Encontrados ${botonesAgregar.length} botones de agregar`);
+    
 
     botonesAgregar.forEach((btn, index) => {
         if (btn && btn.parentNode) {
@@ -54,14 +54,14 @@ function resetButtonEvents() {
                         }
                     }
                 });
-                console.log(`✅ Botón agregar ${index + 1} reconfigurado`);
+                
             }
         }
     });
 
     // Resetear botones de información
     const botonesInfo = document.querySelectorAll(".btn-info");
-    console.log(`Encontrados ${botonesInfo.length} botones de info`);
+    
 
     botonesInfo.forEach((btn, index) => {
         if (btn && btn.parentNode) {
@@ -79,14 +79,14 @@ function resetButtonEvents() {
                         window.mostrarInfoEnModal(platoId);
                     }
                 });
-                console.log(`✅ Botón info ${index + 1} reconfigurado`);
+                
             }
         }
     });
 
     // Resetear botones de filtro
     const botonesFiltro = document.querySelectorAll("[data-category]");
-    console.log(`Encontrados ${botonesFiltro.length} botones de filtro`);
+    
 
     botonesFiltro.forEach((btn, index) => {
         if (btn && btn.parentNode) {
@@ -134,7 +134,7 @@ function resetButtonEvents() {
                         }
                     }
                 });
-                console.log(`✅ Botón filtro ${index + 1} reconfigurado`);
+                
             }
         }
     });
@@ -142,7 +142,7 @@ function resetButtonEvents() {
 
 // Función para resetear eventos de búsqueda
 function resetSearchEvents() {
-    console.log("🔍 Reseteando eventos de búsqueda...");
+    
 
     const searchBtn = document.getElementById("searchBtn");
     const searchInput = document.getElementById("searchInput");
@@ -218,7 +218,7 @@ function resetSearchEvents() {
 
 // Función para resetear eventos del carrito
 function resetCartEvents() {
-    console.log("🛒 Reseteando eventos del carrito...");
+    
 
     const cartBtn = document.getElementById("cartBtn");
     if (cartBtn && cartBtn.parentNode) {
@@ -246,11 +246,11 @@ function resetAllEvents() {
         if (typeof lucide !== "undefined") {
             setTimeout(() => {
                 lucide.createIcons();
-                console.log("🎨 Iconos reinicializados");
+                
             }, 100);
         }
 
-        console.log("✅ Todos los eventos han sido reseteados correctamente");
+        
     } catch (error) {
         console.error("❌ Error al resetear eventos:", error);
     }
@@ -290,7 +290,7 @@ const observer = new MutationObserver(function (mutations) {
     });
 
     if (shouldReset) {
-        console.log("🔄 Cambios detectados en el DOM, reseteando eventos...");
+        
         setTimeout(resetAllEvents, 300);
     }
 });
@@ -320,4 +320,4 @@ if (document.readyState === "loading") {
 // Función manual para uso en consola
 window.resetEvents = resetAllEvents;
 
-console.log("✅ Script de corrección de eventos cargado");
+

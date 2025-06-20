@@ -11,7 +11,7 @@ let menuData = [];
 
 // Esperar a que el DOM esté completamente cargado
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('Inicializando menú...');
+    
     
     // Cargar datos del menú
     cargarMenu();
@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Función para cargar el menú desde un archivo JSON
 function cargarMenu() {
-    console.log('Cargando menú...');
+    
     
     // Datos del menú
     menuData = [
@@ -432,7 +432,7 @@ function cargarMenu() {
     // Renderizar el menú en la página
     renderizarMenu(menuData);
     
-    console.log('Menú cargado correctamente');
+    
 }
 
 // Función para renderizar los platos del menú
@@ -564,38 +564,91 @@ function crearTarjetaPlato(plato, esOferta = false) {
 // Función para configurar todos los eventos
 function configurarEventos() {
     // Manejar clic en los botones de filtro por categorías
-    document.querySelectorAll('[data-category]').forEach(btn => {
-        btn.addEventListener('click', function() {
+    document.querySelectorAll("[data-category]").forEach((btn) => {
+        btn.addEventListener("click", function () {
             const categoria = this.dataset.category;
-            
+
             // Quitar clase active de todos los botones
-            document.querySelectorAll('[data-category]').forEach(b => {
-                b.classList.remove('active');
+            document.querySelectorAll("[data-category]").forEach((b) => {
+                b.classList.remove("active");
             });
-            
+
             // Agregar clase active al botón clickeado
-            this.classList.add('active');
-            
+            this.classList.add("active");
+
             // Filtrar platos
             filtrarPlatosPorCategoria(categoria);
         });
     });
-    
+
+    document.addEventListener("change", function (e) {
+        if (e.target.name === "tipoEntrega") {
+            const direccionContainer =
+                document.getElementById("direccionContainer");
+            const inputDireccion = document.getElementById("inputDireccion");
+
+            if (e.target.value === "delivery") {
+                // Mostrar campo de dirección
+                direccionContainer.style.display = "block";
+                inputDireccion.required = true;
+            } else {
+                // Ocultar campo de dirección
+                direccionContainer.style.display = "none";
+                inputDireccion.required = false;
+                inputDireccion.value = ""; // Limpiar el campo
+            }
+        }
+    });
+
+    // Agregar al final de la función configurarEventos(), justo antes del cierre:
+
+    // Configurar eventos para el tipo de entrega en el modal del carrito
+    document
+        .getElementById("cartModal")
+        .addEventListener("shown.bs.modal", function () {
+            // Configurar eventos cuando se abre el modal
+            const radioDelivery = document.getElementById("radioDelivery");
+            const radioRetiro = document.getElementById("radioRetiro");
+            const direccionContainer =
+                document.getElementById("direccionContainer");
+            const inputDireccion = document.getElementById("inputDireccion");
+
+            function toggleDireccion() {
+                if (radioDelivery.checked) {
+                    direccionContainer.style.display = "block";
+                    inputDireccion.required = true;
+                } else {
+                    direccionContainer.style.display = "none";
+                    inputDireccion.required = false;
+                    inputDireccion.value = "";
+                }
+            }
+
+            // Ejecutar al abrir el modal
+            toggleDireccion();
+
+            // Agregar listeners a los radio buttons
+            radioDelivery.addEventListener("change", toggleDireccion);
+            radioRetiro.addEventListener("change", toggleDireccion);
+        });
+
+    // Fin de configurarEventos
+
     // Configurar modal de producto
-    document.addEventListener('click', function(e) {
+    document.addEventListener("click", function (e) {
         // Botones de info
-        if (e.target.closest('.info-btn')) {
-            const id = parseInt(e.target.closest('.info-btn').dataset.id);
+        if (e.target.closest(".info-btn")) {
+            const id = parseInt(e.target.closest(".info-btn").dataset.id);
             mostrarDetallesProducto(id);
         }
-        
+
         // Botones de agregar
-        if (e.target.closest('.add-btn')) {
-            const id = parseInt(e.target.closest('.add-btn').dataset.id);
+        if (e.target.closest(".add-btn")) {
+            const id = parseInt(e.target.closest(".add-btn").dataset.id);
             agregarProductoAlCarrito(id);
         }
     });
-    
+
     // Fin de configurarEventos
 }
 
@@ -713,12 +766,12 @@ function getProductoPorId(id) {
     const originalPlato = menuData.find(plato => plato.id === id);
     
     if (originalPlato) {
-        console.log('Plato encontrado en menuData:', originalPlato);
+        
         return originalPlato;
     }
     
     // Si no lo encontramos en el array original, buscamos en el DOM como fallback
-    console.log('Plato no encontrado en menuData, buscando en DOM...');
+    
     const todosLosPlatos = Array.from(document.querySelectorAll('.card')).map(card => {
         const idBtn = card.querySelector('.info-btn')?.dataset.id;
         if (idBtn && parseInt(idBtn) === id) {

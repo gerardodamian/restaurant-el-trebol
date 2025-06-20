@@ -365,7 +365,7 @@ setupEventListeners() {
 
 // Método para renderizar el modal del carrito
 renderCartModal() {
-    console.log("Renderizando modal del carrito");
+   
     
     // Obtener las referencias a los elementos del DOM una sola vez
     const cartItems = document.getElementById('cartItems');
@@ -470,7 +470,7 @@ renderCartModal() {
 
 // Método para agregar productos al carrito
 agregarAlCarrito(plato) {
-    console.log("Agregando al carrito:", plato.name);
+    
     
     try {
         // Buscar si el plato ya está en el carrito

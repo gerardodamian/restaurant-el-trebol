@@ -1,10 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('Inicializando sistema de reservas...');
     
     const formulario = document.getElementById('reservaForm');
     
     if (formulario) {
-        console.log('Formulario de reservas encontrado');
         
         // Establecer la fecha mínima como hoy
         const inputFecha = document.getElementById('fecha');

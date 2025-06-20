@@ -251,6 +251,166 @@
                 </div>
             </section>
 
+            <!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú del Restaurante</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+</head>
+<body>
+    <div class="container my-5">
+        <!-- Encabezado -->
+        <div class="text-center mb-5">
+            <h1 class="display-4 fw-bold text-primary">Nuestro Menú</h1>
+            <p class="lead text-muted">Descubre nuestros platos especiales</p>
+        </div>
+
+        <!-- Filtros por categoría -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="d-flex flex-wrap justify-content-center gap-2">
+                    <button class="btn btn-outline-primary active" data-category="all">Todos</button>
+                    <button class="btn btn-outline-primary" data-category="Entradas">Entradas</button>
+                    <button class="btn btn-outline-primary" data-category="Platos Principales">Platos Principales</button>
+                    <button class="btn btn-outline-primary" data-category="Pastas">Pastas</button>
+                    <button class="btn btn-outline-primary" data-category="Arroces">Arroces</button>
+                    <button class="btn btn-outline-primary" data-category="Postres">Postres</button>
+                    <button class="btn btn-outline-primary" data-category="Bebidas">Bebidas</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección de Ofertas/Destacados -->
+        <div class="mb-5">
+            <h2 class="h3 mb-4 text-success">
+                <i class="bi bi-star-fill me-2"></i>Especiales del Chef
+            </h2>
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="ofertasGrid">
+                <!-- Los platos destacados se cargarán aquí dinámicamente -->
+            </div>
+        </div>
+
+        <!-- Sección de Todos los Productos -->
+        <div class="mb-5">
+            <h2 class="h3 mb-4">
+                <i class="bi bi-grid-3x3-gap-fill me-2"></i>Todos Nuestros Platos
+            </h2>
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="productosGrid">
+                <!-- Los platos regulares se cargarán aquí dinámicamente -->
+            </div>
+        </div>
+
+        <!-- Contenedor principal del menú (para compatibilidad) -->
+        <div class="d-none" id="menuCompleto">
+            <!-- Contenedor adicional si es necesario -->
+        </div>
+    </div>
+
+    <!-- Modal para detalles del producto -->
+    <div class="modal fade" id="productoModal" tabindex="-1" aria-labelledby="productoModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="productoModalLabel">Detalles del Producto</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <img id="modalProductoImagen" src="" alt="" class="img-fluid rounded">
+                        </div>
+                        <div class="col-md-6">
+                            <span id="modalProductoCategoria" class="badge bg-light text-dark mb-2"></span>
+                            <h3 id="modalProductoTitulo" class="mb-3"></h3>
+                            <p class="fs-4 fw-bold text-success" id="modalProductoPrecio"></p>
+                            <p id="modalProductoDescripcion" class="text-muted mb-4"></p>
+                            
+                            <h6 class="border-bottom pb-2">Ingredientes:</h6>
+                            <ul id="modalProductoIngredientes" class="list-unstyled">
+                                <!-- Los ingredientes se cargarán aquí -->
+                            </ul>
+                            
+                            <div id="modalPlatosSimilares">
+                                <!-- Los platos similares se cargarán aquí -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-success" onclick="if(productoActual) agregarProductoAlCarrito(productoActual.id)">
+                        <i class="bi bi-cart-plus me-1"></i> Agregar al Carrito
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal del Carrito -->
+    <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="cartModalLabel">Mi Pedido</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Tipo de entrega -->
+                    <div class="mb-4">
+                        <h6>Tipo de entrega:</h6>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="tipoEntrega" id="radioRetiro" value="retiro" checked>
+                            <label class="form-check-label" for="radioRetiro">
+                                Retiro en local
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="tipoEntrega" id="radioDelivery" value="delivery">
+                            <label class="form-check-label" for="radioDelivery">
+                                Delivery
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Campo de dirección (inicialmente oculto) -->
+                    <div id="direccionContainer" style="display: none;" class="mb-4">
+                        <label for="inputDireccion" class="form-label">Dirección de entrega:</label>
+                        <input type="text" class="form-control" id="inputDireccion" placeholder="Ingrese su dirección completa">
+                    </div>
+
+                    <!-- Contenido del carrito se cargará aquí -->
+                    <div id="cartContent">
+                        <p class="text-muted">Su carrito está vacío</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-success">Confirmar Pedido</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Botón flotante del carrito -->
+    <button class="btn btn-success position-fixed bottom-0 end-0 m-4 rounded-circle" style="width: 60px; height: 60px; z-index: 1000;" data-bs-toggle="modal" data-bs-target="#cartModal">
+        <i class="bi bi-cart3 fs-4"></i>
+        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="cartCount" style="display: none;">
+            0
+        </span>
+    </button>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Tu script del menú -->
+    <script src="menu.js"></script>
+</body>
+</html>
+
             <!-- Galería de imágenes -->
             <section class="mb-5">
                 <h2 class="border-bottom pb-2 mb-4">📸 Nuestro Ambiente</h2>

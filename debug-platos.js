@@ -2,19 +2,18 @@
  * Script para verificar y corregir los platos
  */
 document.addEventListener('DOMContentLoaded', function() {
-    console.log("DEBUG PLATOS: Verificando datos...");
     
     // Si no existe app, crearla
     if (!window.app && typeof RestauranteApp === 'function') {
         window.app = new RestauranteApp();
-        console.log("DEBUG PLATOS: App inicializada");
+       
     } else if (!window.app) {
         window.app = {};
     }
     
     // Verificar si los platos están cargados
     if (!window.app.platos || !Array.isArray(window.app.platos) || window.app.platos.length === 0) {
-        console.log("DEBUG PLATOS: No hay platos disponibles, cargando datos de ejemplo");
+       
         
         // Cargar datos de ejemplo
         window.app.platos = [
@@ -60,14 +59,14 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         ];
         
-        console.log("DEBUG PLATOS: Se cargaron platos de ejemplo:", window.app.platos.length);
+       
     } else {
-        console.log(`DEBUG PLATOS: Se encontraron ${window.app.platos.length} platos ya cargados`);
+        
     }
     
     // Mostrar las categorías disponibles
     const categorias = [...new Set(window.app.platos.map(p => p.category))];
-    console.log("DEBUG PLATOS: Categorías disponibles:", categorias);
+    
     
     // Método buscarPlatos si no existe
     if (!window.app.buscarPlatos) {
@@ -85,13 +84,12 @@ document.addEventListener('DOMContentLoaded', function() {
             );
         };
         
-        console.log("DEBUG PLATOS: Método buscarPlatos agregado");
     }
     
     // Agregar el método mostrarNotificacion si no existe
     if (!window.app.mostrarNotificacion) {
         window.app.mostrarNotificacion = function(mensaje) {
-            console.log("NOTIFICACIÓN:", mensaje);
+        
             
             // Crear una notificación visual
             const notificacion = document.createElement('div');
@@ -119,7 +117,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 3000);
         };
         
-        console.log("DEBUG PLATOS: Método mostrarNotificacion agregado");
+    
     }
     
     // Agregar el método agregarAlCarrito si no existe
@@ -135,14 +133,14 @@ document.addEventListener('DOMContentLoaded', function() {
             if (platoEnCarrito) {
                 // Si ya está, incrementar cantidad
                 platoEnCarrito.cantidad++;
-                console.log(`Cantidad incrementada para ${plato.name}`);
+               
             } else {
                 // Si no está, agregarlo con cantidad 1
                 this.carrito.push({
                     ...plato,
                     cantidad: 1
                 });
-                console.log(`${plato.name} agregado al carrito`);
+                
             }
             
             // Actualizar el carrito en localStorage
@@ -162,8 +160,8 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         };
         
-        console.log("DEBUG PLATOS: Método agregarAlCarrito agregado");
+      
     }
     
-    console.log("DEBUG PLATOS: Verificación completa");
+    ;
 });

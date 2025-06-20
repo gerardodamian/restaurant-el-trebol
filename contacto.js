@@ -1,10 +1,10 @@
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('Inicializando formulario de contacto...');
+    
     
     const formularioContacto = document.getElementById('contactForm');
     
     if (formularioContacto) {
-        console.log('Formulario de contacto encontrado');
+        
         
         // Cargar datos del cliente si existen
         const nombreGuardado = localStorage.getItem('cliente_nombre');
